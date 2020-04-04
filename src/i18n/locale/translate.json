@@ -1,0 +1,135 @@
+{
+  "home": {
+    "findHero": "Find someone who wants to help you!",
+    "becameHero": "...or become a hero!",
+    "search": "Enter address"
+  },
+  "help": {
+    "title": "Help",
+    "header": "How does it work?",
+    "button": "help",
+    "buttonHome": "how does it work",
+    "1stParagraph": "It's principles are extremely simple. You enter your street on the main page and check where the person ready to help is closest to you. The phone number or e-mail address you provide makes contact with her simple. You will immediately see a list of things you can get support for.",
+    "1stParagraphBold": "Neighbour care! It's a unique application that puts the most important goal of taking care of you and your immediate surroundings. ",
+    "2ndParagraphBold": "This is a perfect application, for a difficult time of quarantine, but also for everyday life. After all, neighborhood friendliness is at stake every day.",
+    "cleaningPoint": "Doing the shopping and bringing it home to the old man",
+    "careOfBabyPoint": "Taking care of the baby when you need to get something done quickly",
+    "takingDogPoint": "Taking your dog out for a walk when you can't do it yourself",
+    "pickingUpPoint": "Picking up the package in the neighborhood",
+    "drivingUpPoint": "Driving up for something, or dropping you off if you don't have a car",
+    "careOfPetPoint": "Taking care of your pet when you have to leave",
+    "lessonsPoint": "Conducting online lessons that will help you understand a difficult issue or make valuable use of your free time.",
+    "3rdParagraph": "There are so many possibilities!",
+    "4thParagraph": "Just enter your e-mail address. You enter your name, phone number, mark what you are able to do to help the person in your neighborhood and you are ready! ",
+    "4thParagraphBold": "The application allows you to easily join an incredible group of helpful people. ",
+    "4thParagraphBold2": "It's only two minutes to become a superhero of your community! ",
+    "4thParagraph2": "But most importantly, it's up to you to decide what form of contact you'll have and when you can actually act. The application allows you to change your profile audience. Everything is done so that the help you give is real and as optimal as possible.",
+    "5thParagraph": "We can't always do everything by ourselves, but there are always people around us doing similar things!",
+    "5thParagraphBold": "Why not combine those in need of help with those who can give it? This is what Neighbour Care is all about. Let's take care of each other!",
+    "6thParagraph": "If you have any remarks, good, or informative, feel free to contact with us. All the necessary information can be found in the contact section. We are happy to read all the news, we want to create the best space to help each other.",
+    "7thParagraph": "Stick around and ",
+    "7thParagraphBold": "do a lot of good!"
+  },
+  "contact": {
+    "header": "Contact",
+    "idea": "Do you have an idea?",
+    "bug": "Have you found a bug?",
+    "touch": "Or you just wanna stay in touch?",
+    "contact": "Feel free to contact!",
+    "basic": "Basic Information",
+    "taxNumber": "Tax number"
+  },
+  "privacyPolicy": {
+    "header": "Welcome to our Privacy Policy",
+    "title": "Your privacy is critically important to us.",
+    "button": "privacy policy"
+  },
+  "termsAndCond": {
+    "header": "Welcome to",
+    "button": "terms and conditions"
+  },
+  "login": {
+    "header": "Login",
+    "button": "Log in with email",
+    "action": "login"
+  },
+  "createAccountEmail": {
+    "header": "Create account",
+    "button": "create account",
+    "confirmPassword": "Confirm Password",
+    "termsAndCon": "I declare that I have read and understand the content of the",
+    "privacyPolicy": "I declare that I have read the",
+    "action": "create account"
+  },
+  "search": {
+    "distance": "Distance in km",
+    "notFound": "We haven't found anybody in the area. Try to expand the range. Share our site so we can build a community!",
+    "found": "We found",
+    "users": "volunteers",
+    "user": "volunteer"
+  },
+  "card": {
+    "helpWith": "Can help with:",
+     "address": "Address"
+  },
+  "settings": {
+    "header": "Account settings",
+    "generalInf": "General Information",
+    "addressInf": "Address Information",
+    "privacyInfo": "You can additionally share your address.",
+    "changePass": "Change password",
+    "addressVisible": "Show address",
+    "visible": "Visible for other",
+    "visibleError": "We couldn't get you position. Enable localization or provide address",
+    "name": "Name*",
+    "surname": "Surname",
+    "email": "Email",
+    "phone": "Phone*",
+    "action": "save",
+    "chooseCategory": "Choose how you can help*",
+    "categories": {
+      "cat:0": "Walking with a pet",
+      "cat:10": "Care of pet",
+      "cat:20": "Shopping and bringing in",
+      "cat:30": "Receive and bring something",
+      "cat:31": "Have a car",
+      "cat:40": "Childcare",
+      "cat:50": "Online tutoring",
+      "cat:60": "Other stuff"
+    }
+  },
+  "notifications": {
+    "logged": {
+      "in": "Logged in",
+      "out": "Logged out"
+    },
+    "provideInfo": "Please, provide your information to become a hero.",
+    "accCreated": "Account created.",
+    "accUpdates": "Information updated.",
+    "requiredError": "Fill all required fields."
+  },
+  "common": {
+    "cancel": "cancel",
+    "close": "close",
+    "email": "Email",
+    "password": "Password",
+    "showEmail": "Show email",
+    "showPhone": "Show phone number"
+  },
+  "address": {
+    "street": "Street",
+    "streetNum": "Street number",
+    "zipCode": "Zip-Code",
+    "city": "City",
+    "country": "Country"
+  },
+  "cache": {
+    "info": "website use cookies to ensure you get the best experience",
+    "button": "I accept"
+  },
+  "menu": {
+    "home": "Home page",
+    "logout": "Logout",
+    "login": "Login"
+  }
+}

@@ -1,32 +1,325 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="main-container" class="main-font-color">
+      <div></div>
+    <v-app-bar
+      app
+      color="#F5B278"
+      dark
+      flat
+      height="84px"
+      :absolute="$route.name === 'Home'"
+      class="navbar__bar"
+    >
+      <div class="navbar__div--img" v-if="$route.name !== 'Home'">
+        <v-img
+          alt="Neighbour care logo"
+          class="shrink navbar__img"
+          contain
+          :src="require('@/assets/logo/logo.png')"
+          @click="goToHomePage"
+        />
+<!--          <h1 class="shrink navbar__h1" @click="goToHomePage">Neighbour care</h1>-->
+      </div>
+
+      <v-spacer></v-spacer>
+        <ChangeLanguage />
+       <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                v-on="on"
+              >
+                <v-avatar :color="userUID ? '#C5E1A5' : '#3a4748'" size="48">
+                  <v-icon dark>mdi-account-circle</v-icon>
+                </v-avatar>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item
+                      v-for="(item, index) in menuContent"
+                      :key="index"
+                      @click="item.f"
+              >
+                <v-list-item-title>{{item.title}}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+    </v-app-bar>
+      <v-snackbar
+        v-model="notification.visible"
+        :color="notification.color"
+        :timeout="notification.timeout"
+        top
+        right
+        >
+            {{ notification.text }}
+          <v-icon
+                  dark
+                  text
+                  @click="notification.visible = false"
+          >
+              mdi-close
+          </v-icon>
+        </v-snackbar>
+    <LoginEmail @click:outside="closeEmailLogin" @closeLoginEmailSheet="closeEmailLogin" :sheet="loginSheet"/>
+    <v-content class="content generic--background">
+        <router-view @openLoginEmailSheet="openEmailLogin"></router-view>
+    </v-content>
+      <v-footer color="#F5B278" min-height="84px">
+          <cookie-law theme="blood-orange">
+              <div slot-scope="props" class="cookies__div">
+                  <span slot="message">
+                      Neighbour care {{$t('cache.info')}}
+                  </span>
+                  <span>
+                      <PrivacyPolicy/>
+                      <v-btn
+                              @click="props.accept"
+                              color="#5C98C8"
+                      >
+                          <v-icon left>mdi-cookie</v-icon>
+                          {{$t('cache.button')}}
+                      </v-btn>
+                  </span>
+              </div>
+          </cookie-law>
+          <span v-if='!isMobile' class="footer__span--all-info">
+              <Help/>
+              <PrivacyPolicy/>
+              <span class="footer__span--date">{{ new Date().getFullYear() }} — </span><strong>Neighbour care</strong>
+              <TermsAndCondition/>
+              <Contact/>
+          </span>
+          <span v-if='isMobile'
+                :class="{'footer__span--all-info': true, 'footer__span--all-info-space': $route.name === 'Search'}">
+              <span class="text-center">
+                  <span class="footer__span--date">{{ new Date().getFullYear() }} — </span><strong>Neighbour care</strong>
+              </span>
+              <Help/>
+              <PrivacyPolicy/>
+              <TermsAndCondition/>
+              <Contact/>
+          </span>
+      </v-footer>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import firebase from '@/firebase'
+import { mapActions, mapState, mapMutations} from 'vuex'
+import LoginEmail from '@/components/LoginEmail.vue'
+import PrivacyPolicy from '@/components/PrivacyPolicy.vue'
+import TermsAndCondition from '@/components/TermsAndCondition.vue'
+import Contact from '@/components/Contact.vue'
+import Help from '@/components/Help.vue'
+import CookieLaw from 'vue-cookie-law'
+import ChangeLanguage from '@/components/ChangeLanguage.vue'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  components: {
+      LoginEmail,
+      PrivacyPolicy,
+      TermsAndCondition,
+      CookieLaw,
+      Contact,
+      Help,
+      ChangeLanguage
+  },
+  created() {
+      this.createUserObserver()
+      screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+      if (screen.lockOrientationUniversal("landscape-primary")) {
+          console.log('Locked screen')
+      } else {
+          console.log('Some problem occurs during locking screen')
+      }
+  },
+  mounted() {
+    this.searchedPlace = {
+      location: {
+        lat: null,
+        lng: null,
+      },
+      address: null,
+    }
+    // firebase.firebase.analytics().logEvent('notification_received')
+  },
+  computed: {
+    ...mapState('user', ['userUID']),
+    ...mapState('notification', ['notification']),
+    menuContent() {
+      return this.userUID ?
+              [
+                      { title: this.$t('menu.home'), f: this.goToHomePage  },
+                      { title: this.$t('menu.settings'), f: this.openAccountSettings  },
+                      { title: this.$t('menu.logout'), f: this.logout},
+              ] :
+              [
+                      { title: this.$t('menu.login'), f: this.openEmailLogin  }
+              ]
+    },
+    isMobile() {
+      return screen.width <= 768
+    }
+  },
+  data: () => ({
+    loginSheet: false
+  }),
+  methods: {
+    ...mapActions('user', ['setUserUID']),
+      ...mapMutations('notification', ['SET_SUCCESS_SNACK', 'SET_ERROR_SNACK']),
+    async logout() {
+        try{
+            await firebase.auth.signOut()
+            this.SET_SUCCESS_SNACK(this.$t('notifications.logged.out'))
+        } catch (e) {
+            this.SET_ERROR_SNACK(e.message)
+        }
+      await this.setUserUID({ uid: null })
+      localStorage.removeItem('nh-user-information')
+      localStorage.removeItem('nh-user-information-mail')
+    },
+    openAccountSettings() {
+      this.$router.push({ name: 'AccountInformation' })
+    },
+    closeEmailLogin() {
+      this.loginSheet = false
+    },
+    openEmailLogin() {
+      this.loginSheet = true
+    },
+    createUserObserver() {
+      firebase.auth.onAuthStateChanged( async (user) => {
+        await this.setUserUID(user)
+        // this.user = user
+      })
+    },
+    goToHomePage() {
+        this.$router.push({ name: 'Home' })
     }
   }
 }
+</script>
+<style scoped lang="scss">
+    @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+        #main-container {
+          transform: rotate(-90deg);
+          transform-origin: left top;
+          width: 100vh;
+          overflow-x: hidden;
+          position: absolute;
+          top: 100%;
+          left: 0;
+        }
+      }
+
+    .main-font-color {
+        color: #3a4748 !important;
+        font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif;
+    }
+    .button-color {
+        color: #3a4748 !important;
+    }
+  .v-application--is-ltr .v-toolbar__content > .v-btn.v-btn--icon:last-child {
+    margin-right: 0 !important;
+  }
+  .v-btn--outlined {
+      border: thin solid #3a4748;;
+  }
+  .v-icon {
+      color: white;
+  }
+  .Cookie--blood-orange {
+      background-color: #3a4748 !important;
+  }
+  .generic {
+      &--background {
+          background-color: #F5B278;
+      }
+  }
+   @media (min-width: 768px) {
+        .navbar {
+            &__h1 {
+              font-weight: 700;
+              letter-spacing: 2px;
+              font-size: 2.7rem;
+              cursor: pointer;
+              color: #3a4748;
+          }
+            &__div{
+                &--img {
+                    width: 90%;
+                }
+            }
+            &__img {
+                width: 30%;
+                height: auto;
+                margin-left: 30px;
+                cursor: pointer;
+            }
+        }
+       .footer {
+           &__span {
+                &--all-info {
+                    margin: auto;
+                }
+               &--date {
+                   color: #3a4748;
+               }
+           }
+        }
+       .cookies {
+           &__div {
+               display: flex;
+               width: 100%;
+               justify-content: space-between;
+               align-items: center;
+           }
+       }
+    }
+    @media (max-width: 768px) {
+        .navbar {
+            &__h1 {
+              font-weight: 700;
+              letter-spacing: 2px;
+              font-size: 2rem;
+              cursor: pointer;
+              color: #3a4748;
+          }
+          &__div {
+              &--img {
+                  width: 65%;
+              }
+          }
+          &__img {
+              cursor: pointer;
+          }
+        }
+        .footer {
+           &__span {
+                &--all-info {
+                    display: flex;
+                    flex-direction: column;
+                    margin: auto;
+                    &-space {
+                        margin-bottom: 54px;
+                    }
+                }
+           }
+            &--date {
+                   color: #3a4748;
+               }
+        }
+        .cookies {
+           &__div {
+               text-align: center;
+               display: flex;
+               flex-direction: column;
+               width: 100%;
+               justify-content: center;
+               align-items: center;
+           }
+       }
+    }
 </style>

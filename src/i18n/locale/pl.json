@@ -1,0 +1,140 @@
+{
+  "home": {
+    "findHero": "Znajdz kogoś kto Ci pomoże!",
+    "becameHero": "...albo sam zostań bohaterem!",
+    "search": "Wpisz adres"
+  },
+  "help": {
+    "title": "Pomoc",
+    "header": "Jak to działa?",
+    "button": "pomoc",
+    "buttonHome": "jak to działa",
+    "1stParagraph": "Jego zasady są niezwykle proste. Wystarczy tylko wpisać swoją ulicę na stronie głównej i znaleźć najbliżej położoną osobę gotową do pomocy. Podany przez Ciebie numer telefonu lub adres e-mail sprawia, że kontakt z nią jest bardzo prosty. Natychmiast zobaczysz listę rzeczy, w których możesz uzyskać wsparcie. ",
+    "1stParagraphBold": "Neighbour care! Jest to wyjątkowa aplikacja, która stawia sobie za priorytet opiekę nad Tobą i Twoim najbliższym otoczeniem. ",
+    "2ndParagraphBold": "Doskonałe narzędzie na trudny okres kwarantanny, ale także do codziennego użytku. W końcu na co dzień chodzi o życzliwość sąsiedzką. ",
+    "cleaningPoint": "Robienie zakupów i przynoszenie go do domu starszej osobie",
+    "careOfBabyPoint": "Opieka nad dzieckiem, gdy trzeba coś szybko załatwić",
+    "takingDogPoint": "Zabieranie psa na spacer, gdy nie możesz tego zrobić sam.",
+    "pickingUpPoint": "Odbiór paczki w okolicy",
+    "drivingUpPoint": "Podjechać po coś, albo podrzucić Cię, jeśli nie masz samochodu.",
+    "careOfPetPoint": "Opieka nad zwierzęciem, gdy musisz wyjść",
+    "lessonsPoint": "Prowadzenie lekcji online, które pomogą Ci zrozumieć trudny problem lub wykorzystać wolny czas.",
+    "3rdParagraph": "Jest tak wiele możliwości! ",
+    "4thParagraph": "Wystarczy podać swój adres e-mail. Wpisz swoje imię i nazwisko, numer telefonu, zaznacz, co możesz robić, by pomóc osobie w Twojej okolicy i jesteś gotowy! ",
+    "4thParagraphBold": "Aplikacja pozwala na łatwe dołączenie do niesamowitej grupy pomocnych osób. ",
+    "4thParagraphBold2": "Tylko dwie minuty, aby stać się superbohaterem Twojej społeczności! ",
+    "4thParagraph2": "Najważniejsze jest to, że to od Ciebie zależy, jaką formę kontaktu będziesz miał i kiedy naprawdę będziesz mógł działać. Aplikacja pozwala na zmianę profilu odbiorców. Wszystko jest zrobione tak, aby pomoc której udzielasz, była realna i jak najbardziej efektywna. ",
+    "5thParagraph": "Nie możemy zawsze robić wszystkiego sami, jednak zawsze wokół nas są ludzie robiący podobne rzeczy! ",
+    "5thParagraphBold": "Dlaczego nie połączyć tych, którzy potrzebują pomocy, z tymi, którzy mogą jej udzielić? Na tym polega Neighbour Care. Zajmijmy się sobą nawzajem! ",
+    "6thParagraph": "Jeśli masz jakieś uwagi, dobre lub pouczające, prosimy o kontakt z nami. Wszystkie niezbędne informacje można znaleźć w dziale kontakt. Z radością przeczytamy wszystkie wiadomości, chcemy tworzyć najlepszą przestrzeń do pomocy sobie nawzajem. ",
+    "7thParagraph": "Trzymajcie się i ",
+    "7thParagraphBold": "róbcie dużo dobrego!"
+  },
+  "contact": {
+    "header": "Kontakt",
+    "idea": "Masz pomysł?",
+    "bug": "Znalazłeś/aś błąd?",
+    "touch": "Czy po prostu chcesz pozostać w kontakcie?",
+    "contact": "Zapraszamy do kontaktu!",
+    "basic": "Informacje podstawowe",
+    "taxNumber": "NIP"
+  },
+  "privacyPolicy": {
+    "header": "Witamy w naszej Polityce Prywatności (ENG)",
+    "title": "Twoja prywatność jest dla nas niezwykle ważna.",
+    "button": "polityka prywatności (ENG)"
+  },
+  "termsAndCond": {
+    "header": "Witamy w",
+    "button": "zasady i warunki (ENG)"
+  },
+  "login": {
+    "header": "Logowanie",
+    "button": "Zaloguj się za pomocą email",
+    "action": "Zaloguj"
+  },
+  "createAccountEmail": {
+    "header": "Utwórz konto",
+    "button": "utwórz konto",
+    "confirmPassword": "Potwierdź Hasło",
+    "termsAndCon": "Oświadczam, że przeczytałem i rozumiem treść",
+    "privacyPolicy": "Oświadczam, że przeczytałem",
+    "action": "utwórz konto"
+  },
+  "search": {
+    "distance": "Dystans w km",
+    "notFound": "Nie znaleźliśmy nikogo w okolicy. Spróbuj poszerzyć obszar poszukiwań. Podziel się naszą stroną z innymi, abyśmy mogli wspólnie budować społeczność!",
+    "found": "Znaleźliśmy",
+    "users": "wolontariuszy",
+    "user": "wolontariusza"
+  },
+  "card": {
+    "helpWith": "Może pomóc z:",
+    "address": "Adres"
+  },
+  "settings": {
+    "header": "Ustawienia Konta",
+    "generalInf": "Informacje Ogólne",
+    "addressInf": "Dane Adresowe",
+    "privacyInfo": "Możesz dodatkowo udostępnić adres.",
+    "changePass": "Zmiana hasła",
+    "addressVisible": "Widoczność adresu",
+    "visible": "Widoczne dla innych",
+    "visibleError": "Nie możemy określić Twojej pozycji. Udostępnij położenie albo wprowadź adres.",
+    "name": "Imie*",
+    "surname": "Nazwisko",
+    "email": "Email",
+    "phone": "Nr. Telefonu*",
+    "chooseCategory": "Wybierz jak możesz pomóc*",
+    "action": "zapisz",
+    "categories": {
+      "cat:0": "Wyprowadzanie zwierząt",
+      "cat:10": "Zajmowanie się zwierzętami",
+      "cat:20": "Zakupy i ich przyniesie",
+      "cat:30": "Odbiór i dostarczenie zamówionej rzeczy",
+      "cat:31": "Posiada auto",
+      "cat:40": "Opieka nad dziećmi",
+      "cat:50": "Korepetycje online",
+      "cat:60": "Inne sprawy"
+    }
+  },
+  "notifications": {
+    "logged": {
+      "in": "Zalogowano",
+      "out": "Wylogowano"
+    },
+    "provideInfo": "Proszę, podaj swoje informacje, aby zostać bohaterem.",
+    "accCreated": "Konto zostało utworzone.",
+    "accUpdates": "Dane zostały zaktualizowane.",
+    "requiredError": "Uzupełnij wszystkie wymagane pola."
+  },
+  "common": {
+    "cancel": "anuluj",
+    "close": "zamknij",
+    "email": "Email",
+    "password": "Hasło",
+    "showEmail": "Pokaż email",
+    "showPhone": "Pokaż numer telefonu"
+  },
+  "address": {
+    "street": "Ulica",
+    "streetNum": "Numer budynku",
+    "zipCode": "Kod pocztowy",
+    "city": "Miejscowość",
+    "country": "Państwo"
+  },
+  "cache": {
+    "info": "strona korzysta z plików cookie, aby zapewnić Ci jak najlepsze usługi.",
+    "button": "Akceptuje"
+  },
+  "languages": {
+    "lang:pl": "Polski",
+    "lang:en": "English"
+  },
+  "menu": {
+    "home": "Strona główna",
+    "settings" : "@:settings.header",
+    "logout": "Wyloguj",
+    "login": "Zaloguj"
+  }
+}
