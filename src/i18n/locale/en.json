@@ -62,11 +62,12 @@
     "action": "create account"
   },
   "search": {
-    "distance": "Distance in km",
+    "distance": "Look within {radius}km radius",
     "notFound": "We haven't found anybody in the area. Try to expand the range. Share our site so we can build a community!",
     "found": "We found",
     "users": "volunteers",
-    "user": "volunteer"
+    "user": "volunteer",
+    "categoryFilter": "Filter by category"
   },
   "card": {
     "helpWith": "Can help with:",

@@ -1,155 +1,160 @@
 <template>
-    <v-bottom-sheet v-model="sheet">
-        <template v-slot:activator="{ on }">
-            <v-btn
-                    text
-                    v-on="on"
-                    class="create-acc__button--activator button-color"
-            >
-                <v-icon left>mdi-pencil</v-icon>
-                {{$t('createAccountEmail.button')}}
-            </v-btn>
-        </template>
-        <v-card class="create-acc__card">
-            <v-card-title class="create-acc__card--title">
-                <h2 class="create-acc__h2" v-t="'createAccountEmail.header'" />
-            </v-card-title>
-            <v-card-text class="create-acc__div">
-                <v-form v-model="valid">
-                    <v-text-field
-                            class="create-acc__input"
-                            :rules="[rules.required, rules.emailValidation]"
-                            v-model="email"
-                            :placeholder="$t('common.email')"
-                            autofocus
-                    ></v-text-field>
-                    <v-text-field
-                            :rules="[rules.required]"
-                            v-model="password"
-                            type="password"
-                            :placeholder="$t('common.password')"
-                    ></v-text-field>
-                    <v-text-field
-                            :rules="[rules.required, passwordConfirmationRule]"
-                            v-model="confirmPassword"
-                            type="password"
-                            :placeholder="$t('createAccountEmail.confirmPassword')"
-                    ></v-text-field>
-                    <v-switch
-                            v-model="acceptPrivacyPolicy"
-                            :rules="[rules.required]"
-                            inset
-                            color="#6CBD6F"
-                    >
-                        <template v-slot:label>
-                            <div class="create-acc__div--conditions">
-                                {{$t('createAccountEmail.termsAndCon')}}
-                                <TermsAndCondition/>
-                            </div>
-                        </template>
-                    </v-switch>
-                    <v-switch
-                            v-model="acceptTermsAndConditions"
-                            :rules="[rules.required]"
-                            inset
-                            color="#6CBD6F"
-                    >
-                        <template v-slot:label>
-                            <div class="create-acc__div--conditions">
-                                {{$t('createAccountEmail.privacyPolicy')}}
-                                <PrivacyPolicy/>
-                            </div>
-                        </template>
-                    </v-switch>
-                </v-form>
-            </v-card-text>
-            <v-card-actions class="create-acc__card--actions">
-                <v-btn
-                        v-if="!loading"
-                        class="create-acc__button text-uppercase"
-                        @click="createAccount"
-                        :disabled="!valid"
-                        outlined
-                        v-t="'createAccountEmail.action'"
-                />
-                <v-progress-circular
-                        v-if="loading"
-                        class="create-acc__button"
-                        size="36"
-                        :width="3"
-                        color="#3a4748"
-                        indeterminate
-                ></v-progress-circular>
-                <v-btn
-                        class="create-acc__button text-uppercase"
-                        text
-                        color="red"
-                        @click="sheet = false"
-                        v-t="'common.cancel'"
-                />
-            </v-card-actions>
-        </v-card>
-    </v-bottom-sheet>
+  <v-bottom-sheet v-model="sheet">
+    <template v-slot:activator="{ on }">
+      <v-btn
+        text
+        class="create-acc__button--activator button-color"
+        v-on="on"
+      >
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
+        {{ $t('createAccountEmail.button') }}
+      </v-btn>
+    </template>
+    <v-card class="create-acc__card">
+      <v-card-title class="create-acc__card--title">
+        <h2
+          v-t="'createAccountEmail.header'"
+          class="create-acc__h2"
+        />
+      </v-card-title>
+      <v-card-text class="create-acc__div">
+        <v-form v-model="valid">
+          <v-text-field
+            v-model="email"
+            class="create-acc__input"
+            :rules="[rules.required, rules.emailValidation]"
+            :placeholder="$t('common.email')"
+            autofocus
+          />
+          <v-text-field
+            v-model="password"
+            :rules="[rules.required]"
+            type="password"
+            :placeholder="$t('common.password')"
+          />
+          <v-text-field
+            v-model="confirmPassword"
+            :rules="[rules.required, passwordConfirmationRule]"
+            type="password"
+            :placeholder="$t('createAccountEmail.confirmPassword')"
+          />
+          <v-switch
+            v-model="acceptPrivacyPolicy"
+            :rules="[rules.required]"
+            inset
+            color="#6CBD6F"
+          >
+            <template v-slot:label>
+              <div class="create-acc__div--conditions">
+                {{ $t('createAccountEmail.termsAndCon') }}
+                <TermsAndCondition />
+              </div>
+            </template>
+          </v-switch>
+          <v-switch
+            v-model="acceptTermsAndConditions"
+            :rules="[rules.required]"
+            inset
+            color="#6CBD6F"
+          >
+            <template v-slot:label>
+              <div class="create-acc__div--conditions">
+                {{ $t('createAccountEmail.privacyPolicy') }}
+                <PrivacyPolicy />
+              </div>
+            </template>
+          </v-switch>
+        </v-form>
+      </v-card-text>
+      <v-card-actions class="create-acc__card--actions">
+        <v-btn
+          v-if="!loading"
+          v-t="'createAccountEmail.action'"
+          class="create-acc__button text-uppercase"
+          :disabled="!valid"
+          outlined
+          @click="createAccount"
+        />
+        <v-progress-circular
+          v-if="loading"
+          class="create-acc__button"
+          size="36"
+          :width="3"
+          color="#3a4748"
+          indeterminate
+        />
+        <v-btn
+          v-t="'common.cancel'"
+          class="create-acc__button text-uppercase"
+          text
+          color="red"
+          @click="sheet = false"
+        />
+      </v-card-actions>
+    </v-card>
+  </v-bottom-sheet>
 </template>
 
 <script>
-    import firebase from '@/firebase'
-    import {mapMutations} from 'vuex'
-    import PrivacyPolicy from '@/components/PrivacyPolicy.vue'
-    import TermsAndCondition from '@/components/TermsAndCondition.vue'
+import firebase from '@/firebase';
+import { mapMutations } from 'vuex';
+import PrivacyPolicy from '@/components/PrivacyPolicy.vue';
+import TermsAndCondition from '@/components/TermsAndCondition.vue';
 
-    export default {
-        name: "CreateAccountEmail",
-        components: {
-            PrivacyPolicy,
-            TermsAndCondition
-        },
-        computed: {
-            passwordConfirmationRule() {
-                return () => (this.password === this.confirmPassword) || "Password doesn't match."
-            },
-        },
-        data: () => ({
-            sheet: false,
-            email: '',
-            password: '',
-            confirmPassword: '',
-            valid: true,
-            loading: false,
-            acceptPrivacyPolicy: false,
-            acceptTermsAndConditions: false,
-            rules: {
-                required: value => !!value || 'Required.',
-                emailValidation: value => !!value.match(/^$|^[a-zA-Z0-9._%+-.]+@[a-zA-Z0-9]+\.[a-z]+/) || 'Email is badly formatted'
-            },
-        }),
-        methods: {
-            ...mapMutations('notification', ['SET_SUCCESS_SNACK', 'SET_ERROR_SNACK']),
-            async createAccount() {
-                try {
-                    this.loading = true
-                    await firebase.auth.createUserWithEmailAndPassword(this.email, this.password)
-                    this.SET_SUCCESS_SNACK(this.$t('notifications.accCreated'))
-                    this.$emit('closeCreateAccSheet', true)
-                    this.email = ''
-                    this.password = ''
-                    this.confirmPassword = ''
-                    this.valid = true
-                    this.loading = false
-                    this.acceptPrivacyPolicy = false
-                    this.acceptTermsAndConditions = false
-                } catch (e) {
-                    this.SET_ERROR_SNACK(e.message)
-                    this.password = ''
-                    this.confirmPassword = ''
-                    this.valid = true
-                    this.loading = false
-                    this.acceptPrivacyPolicy = false
-                    this.acceptTermsAndConditions = false
-                }
-            }
-        }
-    }
+export default {
+  name: 'CreateAccountEmail',
+  components: {
+    PrivacyPolicy,
+    TermsAndCondition,
+  },
+  data: () => ({
+    sheet: false,
+    email: '',
+    password: '',
+    confirmPassword: '',
+    valid: true,
+    loading: false,
+    acceptPrivacyPolicy: false,
+    acceptTermsAndConditions: false,
+    rules: {
+      required: (value) => !!value || 'Required.',
+      emailValidation: (value) => !!value.match(/^$|^[a-zA-Z0-9._%+-.]+@[a-zA-Z0-9]+\.[a-z]+/) || 'Email is badly formatted',
+    },
+  }),
+  computed: {
+    passwordConfirmationRule() {
+      return () => (this.password === this.confirmPassword) || "Password doesn't match.";
+    },
+  },
+  methods: {
+    ...mapMutations('notification', ['SET_SUCCESS_SNACK', 'SET_ERROR_SNACK']),
+    async createAccount() {
+      try {
+        this.loading = true;
+        await firebase.auth.createUserWithEmailAndPassword(this.email, this.password);
+        this.SET_SUCCESS_SNACK(this.$t('notifications.accCreated'));
+        this.$emit('closeCreateAccSheet', true);
+        this.email = '';
+        this.password = '';
+        this.confirmPassword = '';
+        this.valid = true;
+        this.loading = false;
+        this.acceptPrivacyPolicy = false;
+        this.acceptTermsAndConditions = false;
+      } catch (e) {
+        this.SET_ERROR_SNACK(e.message);
+        this.password = '';
+        this.confirmPassword = '';
+        this.valid = true;
+        this.loading = false;
+        this.acceptPrivacyPolicy = false;
+        this.acceptTermsAndConditions = false;
+      }
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

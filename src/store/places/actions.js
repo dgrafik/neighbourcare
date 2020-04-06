@@ -1,4 +1,4 @@
-import firebase from '@/firebase'
+import firebase from '@/firebase';
 
 // const getPlaces = async ({ commit }) => {
 //   try {
@@ -10,47 +10,49 @@ import firebase from '@/firebase'
 // }
 
 const setSearchedAddress = ({ commit }, place) => {
-  const { formatted_address, geometry } = place
+  const { formatted_address, geometry } = place;
   commit('SET_LOCATION_SEARCHED_PLACE', {
-      lat: geometry.location.lat(),
-      lng: geometry.location.lng()
-    })
+    lat: geometry.location.lat(),
+    lng: geometry.location.lng(),
+  });
   commit('SET_LOCATION_SEARCHED_CENTER', {
-      lat: geometry.location.lat(),
-      lng: geometry.location.lng()
-    })
-    commit('SET_ADDRESS_SEARCHED_PLACE', formatted_address)
-    localStorage.setItem('nh-place-searched-address', formatted_address)
-    localStorage.setItem('nh-place-searched-location', JSON.stringify({
-      lat: geometry.location.lat(),
-      lng: geometry.location.lng()
-    }))
-}
+    lat: geometry.location.lat(),
+    lng: geometry.location.lng(),
+  });
+  commit('SET_ADDRESS_SEARCHED_PLACE', formatted_address);
+  localStorage.setItem('nh-place-searched-address', formatted_address);
+  localStorage.setItem('nh-place-searched-location', JSON.stringify({
+    lat: geometry.location.lat(),
+    lng: geometry.location.lng(),
+  }));
+};
 
 const searchPlaces = async ({ commit }, place) => {
 // const searchPlaces = async ({ commit, state, dispatch }, data) => {
   try {
-    let { geometry, radius } = place
-    let lat = null
-    let lng = null
+    const { geometry } = place;
+    let lat = null;
+    let lng = null;
     if (geometry.location) {
-      lat = geometry.location.lat()
-      lng = geometry.location.lng()
+      lat = geometry.location.lat();
+      lng = geometry.location.lng();
     } else {
-      lat = geometry.lat
-      lng = geometry.lng
+      lat = geometry.lat;
+      lng = geometry.lng;
     }
-    radius = radius? radius : 1
+    const radius = 15;
     const query = firebase.geocollection.near({
       center: new firebase.firebase.firestore.GeoPoint(
-          lat, lng
+        lat, lng,
       ),
-      radius: radius
+      radius,
     });
-    const markers = []
+    const markers = [];
     query.get().then((value) => {
       value.docs.forEach((doc) => {
-        const { generalInfo, address, socialMedia, email } = doc.data()
+        const {
+          generalInfo, address, socialMedia, email,
+        } = doc.data();
         markers.push({
           generalInfo,
           address,
@@ -58,21 +60,21 @@ const searchPlaces = async ({ commit }, place) => {
           email,
           location: {
             lat: doc.data().coordinates.latitude,
-            lng: doc.data().coordinates.longitude
-          }
-        })
-      })
-      commit('SET_MARKERS', markers)
+            lng: doc.data().coordinates.longitude,
+          },
+        });
+      });
+      commit('SET_MARKERS', markers);
       localStorage.setItem('nh-markers-all-range', JSON.stringify(markers));
       localStorage.setItem('nh-markers-radius', radius);
-    })
+    });
   } catch (e) {
-    throw new Error(e)
+    throw new Error(e);
   }
-}
+};
 
 export default {
   // getPlaces,
   setSearchedAddress,
-  searchPlaces
-}
+  searchPlaces,
+};

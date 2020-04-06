@@ -1,3 +1,4 @@
+/*eslint-disable */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -6,6 +7,7 @@ import * as VueGoogleMaps from "vue2-google-maps"
 import vuetify from './plugins/vuetify'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import { i18n } from '@/i18n/index.js'
+import CustomGoogleAutocomplete from 'vue-custom-google-autocomplete'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -13,6 +15,8 @@ Vue.use(VueGoogleMaps, {
     libraries: "places" // necessary for places input
   }
 });
+
+Vue.use(CustomGoogleAutocomplete)
 
 Vue.config.productionTip = false
 

@@ -62,7 +62,7 @@
     "action": "utwórz konto"
   },
   "search": {
-    "distance": "Dystans w km",
+    "distance": "Szukaj w promieniu {radius}km",
     "notFound": "Nie znaleźliśmy nikogo w okolicy. Spróbuj poszerzyć obszar poszukiwań. Podziel się naszą stroną z innymi, abyśmy mogli wspólnie budować społeczność!",
     "found": "Znaleźliśmy",
     "users": "wolontariuszy",
